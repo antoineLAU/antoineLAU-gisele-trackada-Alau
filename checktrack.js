@@ -23,8 +23,8 @@ if (!existsSync(chemin)) {
 }
 //  Vérifier que les dossiers des projets existent au bon endroit et sont correctement nommés
 // vérifier que chaque projet contient bien les fichiers requis au bon endroit (le tableau required dans track.json)
-let ok = 0;
-let ko = 0;
+let positif = 0;
+let negatif = 0;
 
 
 for (const {name, required} of track.projects) {
@@ -33,33 +33,33 @@ for (const {name, required} of track.projects) {
         
         console.log( "❌", "dossier du project", name);
         console.log(`-le dossier n'existe pas ou n'est pas nommé correctement`); 
-        ko++;
+        negatif++;
 
     }else if (!required.includes( 'index.js' )) {
         console.log( "❌", "dossier du project", name);
         console.log("Le fichier existe pas !");
-        ko++;
+        negatif++;
 
     }else{
 
         console.log( "✅", "dossier du project", name);                          
         console.log(join(root, name), required); 
-        ok++;
+        positif++;
 
     }                        
 }
 
 // Le pourcentage de projets correctement initialisés
 
-const total = ok + ko;
-const pctOk = (ok / total) * 100;
-const pctKo = (ko / total) * 100;
+const total = positif + negatif;
+const pctPosifif = (positif / total) * 100;
+const pctNegatif = (negatif / total) * 100;
 
-const fracOk = (ok / total) * 10;
-const fracKo = (ko / total) * 10
+const fracPositif = (positif / total) * 10;
+const fracNegatif = (negatif / total) * 10
 
 console.log("------ Résumé ------");
-console.log(`✅ ${pctOk}% des projets sont initialisés correctement (${fracOk}/10)`);
-console.log(`❌ ${pctKo}% des projets qui sont pas initialisés correctement (${fracKo}/10)`);
+console.log(`✅ ${pctPosifif}% des projets sont initialisés correctement (${fracPositif}/10)`);
+console.log(`❌ ${pctNegatif}% des projets ne sont pas initialisés correctement (${fracNegatif}/10)`);
 
 
